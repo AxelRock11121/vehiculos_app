@@ -2,9 +2,9 @@
 
 import axios from 'axios';
 
-// Crear una instancia de axios
+//instancia de axios
 const api = axios.create({
-  baseURL: 'http://localhost:5000/api', // Cambia esto según tu configuración
+  baseURL: 'http://localhost:5000/api/vehiculos', 
 });
 
 // Interceptor para agregar el token a cada solicitud

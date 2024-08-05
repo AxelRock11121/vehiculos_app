@@ -20,14 +20,14 @@ const LoginForm = () => {
       localStorage.setItem('token', token);
 
       // Redirigir a la página principal o dashboard
-      window.location.href = '/';
+      window.location.href = '/vehicles';
     } catch (err) {
-      setError('Invalid username or password');
+      setError(err.message);
     }
   };
 
   return (
-    <div className="login-form" style={{backgroundColor:'gray'}}>
+    <div className="login-form">
       <Card style={{ width: '18rem', margin: 'auto', marginTop: '50px', padding: '20px',backgroundColor:'white' }}>
         <Card.Body>
           <Card.Title>Login</Card.Title>
