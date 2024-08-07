@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Table, Button } from 'react-bootstrap';
 import api from '../utils/axiosConfig'; // Asegúrate de tener configurado axios
 
@@ -22,10 +22,27 @@ const VehicleTable = () => {
     }
   };
 
+  const deleteVehicle = async (id) => {
+
+    try {
+      const confirmDelete = window.confirm('Are you sure you want to delete this vehicle?');
+      if (confirmDelete) {
+        const response = await api.post('/BorrarVehiculo', { id });
+        console.log(response);
+      }
+       window.location.reload();
+    }
+    catch (err) {
+      console.log(err.message);
+    }
+
+
+  };
+
   return (
     <div>
       <h2>Lista de Vehículos</h2>
-      <Link to={'/saveVehicle'}>nuevo vehiculo</Link>
+      <Link to={'/CreateVehicle'}>nuevo vehiculo</Link>
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -33,6 +50,9 @@ const VehicleTable = () => {
             <th>Marca</th>
             <th>Modelo</th>
             <th>Color</th>
+            <th>placa</th>
+            <th>año</th>
+            <th>estatus</th>
             <th>Acciones</th>
           </tr>
         </thead>
@@ -43,9 +63,12 @@ const VehicleTable = () => {
               <td>{vehicle.marca}</td>
               <td>{vehicle.modelo}</td>
               <td>{vehicle.color}</td>
+              <td>{vehicle.placa}</td>
+              <td>{vehicle.año}</td>
+              <td>{vehicle.EstatusVehiculo.descripcion}</td>
               <td>
-                <Button variant="warning" size="sm">Editar</Button>{' '}
-                <Button variant="danger" size="sm">Eliminar</Button>
+                <Link className="btn btn-primary ml-3" to={`/UpdateVehicle/${vehicle.id}`}>editar vehiculo</Link>
+                <Button variant="danger" size="sm" onClick={()=>deleteVehicle(vehicle.id)} >Eliminar</Button>
               </td>
             </tr>
           ))}

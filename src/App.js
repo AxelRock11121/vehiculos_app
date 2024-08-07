@@ -13,7 +13,8 @@ function App() {
        <Routes>
        <Route path="/login" element={<LoginForm />} />
        <Route path="/vehicles" element={<ProtectedRoute element={VehicleTable} />} />
-       <Route path="/saveVehicle" element={<ProtectedRoute element={VehicleForm} />} />
+       <Route path="/CreateVehicle" element={<ProtectedRoute element={VehicleForm} />} />
+       <Route path="/UpdateVehicle/:id" element={<ProtectedRoute element={VehicleForm} />} />
        <Route path="/" element={<Navigate to="/login" />} />
         </Routes>
     </Router>
